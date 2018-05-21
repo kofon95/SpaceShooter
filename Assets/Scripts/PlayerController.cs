@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerController : MonoBehaviour {
 
@@ -25,7 +26,7 @@ public class PlayerController : MonoBehaviour {
     
     void Update()
     {
-        if (Input.GetButton("Fire1") && fireOffset < Time.time)
+        if (CrossPlatformInputManager.GetButton("Fire1") && fireOffset < Time.time)
         {
             fireOffset = Time.time + fireRate;
             var shotClone = Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
@@ -41,8 +42,9 @@ public class PlayerController : MonoBehaviour {
     }
 
 	void FixedUpdate () {
-		var h = Input.GetAxis("Horizontal");
-		var v = Input.GetAxis("Vertical");
+        //CrossPlatformInputManager.GetAxis
+        var h = CrossPlatformInputManager.GetAxis("Horizontal");
+		var v = CrossPlatformInputManager.GetAxis("Vertical");
 
 		rb.velocity = new Vector3(h, 0, v) * speed;
 		// rb.AddForce(new Vector3(h, 0, v)) * speed;
